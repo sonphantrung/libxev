@@ -965,9 +965,9 @@ pub const Loop = struct {
 
     /// Sends an empty message to this loop's mach port so that it wakes
     /// up if it is blocking on kevent().
-    fn wakeup(self: *Loop) !void {
-        //try self.mach_port.notify();
-    }
+//    fn wakeup(self: *Loop) !void {
+//        try self.mach_port.notify();
+//    }
 };
 
 /// A completion is a request to perform some work with the loop.
@@ -1266,7 +1266,7 @@ pub const Completion = struct {
                 const ev = ev_ orelse break :res .{ .proc = ProcError.MissingKevent };
 
                 // If we have the exit status, we read it.
-                if (ev.fflags & NOTE_EXIT_FLAGS > 0) {
+                if (ev.fflags & std.c.NOTE.EXIT > 0) {
                     const data: u32 = @intCast(ev.data);
                     if (posix.W.IFEXITED(data)) break :res .{
                         .proc = posix.W.EXITSTATUS(data),
@@ -1542,7 +1542,7 @@ pub const Operation = union(OperationType) {
 
     proc: struct {
         pid: posix.pid_t,
-        flags: u32 = NOTE_EXIT_FLAGS,
+        flags: u32 = std.c.NOTE.EXIT,
     },
 };
 
