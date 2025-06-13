@@ -121,7 +121,7 @@ pub fn build(b: *std.Build) !void {
             .filter = test_filter,
         });
         switch (target.result.os.tag) {
-            .linux, .macos => test_exe.linkLibC(),
+            .linux, .macos, .freebsd => test_exe.linkLibC(),
             else => {},
         }
         break :test_exe test_exe;
