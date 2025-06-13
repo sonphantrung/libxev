@@ -963,11 +963,6 @@ pub const Loop = struct {
         c.task_loop.wakeup() catch {};
     }
 
-    /// Sends an empty message to this loop's mach port so that it wakes
-    /// up if it is blocking on kevent().
-//    fn wakeup(self: *Loop) !void {
-//        try self.mach_port.notify();
-//    }
 };
 
 /// A completion is a request to perform some work with the loop.
