@@ -183,7 +183,7 @@ fn ProcessKqueue(comptime xev: type) type {
                 .op = .{
                     .proc = .{
                         .pid = self.pid,
-                        .flags = xev.Sys.NOTE_EXIT_FLAGS,
+                        .flags = std.c.NOTE.EXIT,
                     },
                 },
 
